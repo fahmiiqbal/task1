@@ -1,0 +1,98 @@
+Private Sub cmdbersih_Click()
+txtabsen.Text = ""
+txttgs.Text = ""
+txtuts.Text = ""
+txtuas.Text = ""
+habsen.Text = ""
+htgs.Text = ""
+huts.Text = ""
+huas.Text = ""
+End Sub
+
+Private Sub cmdhitung_Click()
+'Menghitung Total Nilai
+txttotnil = Val(habsen.Text) + Val(htgs.Text) + Val(huts.Text) + Val(huas.Text)
+'menghitung grade
+If txttotnil >= 80 And txttotnil <= 100 Then
+txtgrade = "A"
+Else
+If txttotnil >= 69 And txttotnil <= 79 Then
+txtgrade = "B"
+Else
+If txttotnil >= 56 And txttotnil <= 68 Then
+txtgrade = "C"
+Else
+If txttotnil >= 40 And txttotnil <= 55 Then
+txtgrade = "D"
+Else
+txtgrade = "E"
+End If
+End If
+End If
+End If
+'Menghitung keterangan
+If txtgrade = "A" Or txtgrade = "B" Or txtgrade = "C" Then
+txtket = "LULUS"
+Else
+txtket = "GAGAL"
+cmdbersih.Enabled = True
+End If
+End Sub
+
+Private Sub cmdkeluar_Click()
+p = MsgBox("Anda Mau Keluar?", vbQuestion + vbOKCancel, "info")
+If p = vbOK Then
+End
+End If
+End Sub
+
+Private Sub cmdtutup_Click()
+Unload Me
+Menu.Show
+End Sub
+
+Private Sub Form_Activate()
+habsen.Enabled = False
+htgs.Enabled = False
+huts.Enabled = False
+huas.Enabled = False
+txttotnil.Enabled = False
+txtgrade.Enabled = False
+txtket.Enabled = False
+cmdhitung.Enabled = False
+cmdbersih.Enabled = False
+txtabsen.SetFocus
+End Sub
+
+Private Sub txtabsen_Change()
+habsen = 0.1 * Val(txtabsen)
+End Sub
+
+Private Sub txtabsen_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then txttgs.SetFocus
+End Sub
+
+Private Sub txttgs_Change()
+htgs = 0.2 * Val(txttgs)
+End Sub
+
+Private Sub txttgs_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then txtuts.SetFocus
+End Sub
+
+Private Sub txtuas_Change()
+huas = 0.4 * Val(txtuas)
+cmdhitung.Enabled = True
+End Sub
+
+Private Sub txtuas_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then cmdhitung.SetFocus
+End Sub
+
+Private Sub txtuts_Change()
+huts = 0.3 * Val(txtuts)
+End Sub
+
+Private Sub txtuts_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then txtuas.SetFocus
+End Sub
